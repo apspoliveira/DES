@@ -10,7 +10,6 @@ var distribuicao = [0, 0, 0, 0, 0, 0];
 
 function output(word) {
     this.percentagem_ganhos =  Math.floor(this.jogos_ganhos/this.jogos_jogados*100);
-    console.log(`A palavra a adivinhar é ${word}`);
     console.log(`Games: ${this.jogos_jogados}   Won: ${this.jogos_ganhos}    % Won:   ${this.percentagem_ganhos} %\n`);
     console.log(`Best try: #${this.melhor_tentativa}   Actual: ${this.sequencia_atual}   Best: ${this.melhor_sequencia}\n`);
 
@@ -26,6 +25,8 @@ function output(word) {
     write_file.save(this.jogos_jogados, this.jogos_ganhos, this.percentagem_ganhos, 
         this.melhor_tentativa, this.sequencia_atual, this.melhor_sequencia, 
         this.distribuicao);
+
+        console.log(`\nA palavra a adivinhar é ${word}\n`);
 }
 
 function calculateSum(arr) {

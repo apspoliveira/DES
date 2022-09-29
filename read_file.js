@@ -7,6 +7,7 @@ const fs = require("fs");
 body.data = [];
 
 function readFile() {
+    console.log("A ler dicionário...");
     let data = '';
 
     const options = {

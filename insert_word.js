@@ -3,7 +3,7 @@ const keyboard = require("./keyboard.js");
 function insertWord(word, words, rl, lines, index, color_array) {
     return new Promise((resolve, reject) => {
 
-        rl.question("", function (answer) {
+        rl.question("Insira palavra: ", function (answer) {
 
             // dictionary does not contain the word
             const match = words.filter(item => {

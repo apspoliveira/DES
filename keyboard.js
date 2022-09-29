@@ -29,7 +29,6 @@ function update_keyboard(word, color) {
 }
 
 function colorize_keyboard(colors, characters) {
-    //console.log(characters);
     // log word hints
     for (var i = 0; i < 6; i++) {
         console.log(colors[i], characters[i][0], characters[i][1],

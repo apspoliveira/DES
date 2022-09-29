@@ -36,6 +36,7 @@ const main = async () => {
             color_array = ["", "", "", "", "", ""];
 
             for (let index = 0; index < tries;) {
+                // clear screen
                 console.clear();
                 keyboard.colorize_keyboard(color_array, lines);
                 statistics.output(word);

@@ -11,7 +11,7 @@ function readFile() {
 
     const options = {
         host: 'raw.githubusercontent.com',
-        path:  '/apspoliveira/DES/master/words.txt', //'/fserb/pt-br/master/palavras',
+        path:  '/fserb/pt-br/master/palavras', //'/apspoliveira/DES/master/words.txt', 
         method: 'GET',
     };
 
@@ -26,7 +26,7 @@ function readFile() {
             body.data = body.data.concat(list);
 
             // when all data have been read
-            if (/*body.data.length > 19200*/body.data.length >= 20)
+            if (body.data.length > 19200/*body.data.length >= 20*/)
                 body.emit('update');
         });
     });

@@ -1,6 +1,8 @@
 const https = require('https');
 var EventEmitter = require("events").EventEmitter;
 var body = new EventEmitter();
+const statistics = require('./statistics.js');
+const fs = require("fs");
 
 body.data = [];
 
@@ -11,12 +13,12 @@ function readFile() {
     // https://raw.githubusercontent.com/apspoliveira/DES/main/words.txt
     const options = {
         host: 'raw.githubusercontent.com',
-        path: '/fserb/pt-br/master/palavras',
+        path:  '/apspoliveira/DES/master/words.txt', //'/fserb/pt-br/master/palavras',
         method: 'GET',
     };
 
     const req = https.request(options, res => {
-        //console.log(`statusCode: ${res.statusCode}`);
+        console.log(`statusCode: ${res.statusCode}`);
         var prev_length = 0;
         var new_length = 0;
 
@@ -30,7 +32,7 @@ function readFile() {
             body.data = body.data.concat(list);
 
             // when all data have been read
-            if (body.data.length > 19200)
+            if (/*body.data.length > 19200*/body.data.length >= 3)
                 body.emit('update');
             //console.log(body.data.length);
 
@@ -45,4 +47,24 @@ function readFile() {
     req.end();
 }
 
-module.exports = { readFile, body };
+function readJSON() {
+    var data = JSON.parse(loadData("statistics.json"));
+    statistics.jogos_jogados = data.jogos_jogados;
+    statistics.jogos_ganhos = data.jogos_ganhos;
+    statistics.percentagem_ganhos = data.percentagem_ganhos;
+    statistics.melhor_tentativa = data.melhor_tentativa;
+    statistics.sequencia_atual = data.sequencia_atual;
+    statistics.melhor_sequencia = data.melhor_sequencia;
+    statistics.distribuicao = data.distribuicao;
+}
+
+const loadData = (path) => {
+    try {
+      return fs.readFileSync(path, 'utf8')
+    } catch (err) {
+      console.error(err)
+      return false
+    }
+  }
+
+module.exports = { readFile, readJSON, body };

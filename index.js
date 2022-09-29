@@ -3,6 +3,7 @@ const fs = require("fs");
 const insert_word = require("./insert_word.js");
 const read_file = require("./read_file.js");
 const statistics = require('./statistics.js');
+const keyboard = require("./keyboard.js");
 
 const rl = readline.createInterface({
     input: process.stdin,
@@ -16,7 +17,18 @@ function generateWord(words) {
 
 const main = async () => {
     var tries = 6;
+    // Load remote dictionary
     var data = read_file.readFile();
+    // Load persistent data from JSON
+    read_file.readJSON();
+    
+    console.log(statistics.jogos_jogados);
+    console.log(statistics.jogos_ganhos);
+    console.log(statistics.percentagem_ganhos);
+    console.log(statistics.melhor_tentativa);
+    console.log(statistics.sequencia_atual);
+    console.log(statistics.melhor_sequencia);
+    console.log(statistics.distribuicao);
 
     read_file.body.on('update', async function () {
         words = read_file.body.data;
@@ -31,13 +43,27 @@ const main = async () => {
                 var result = await insert_word.insertWord(word, words, rl);
                 if (result == undefined)
                     index++;
-                if (result == true)
+                if (result == true) {
+                    statistics.jogos_ganhos++;
+                    statistics.sequencia_atual++;
+                    // Melhor sequência
+                    if (statistics.sequencia_atual > statistics.melhor_sequencia)
+                        statistics.melhor_sequencia = statistics.sequencia_atual;
+                    // Melhor tentativa
+                    if (statistics.melhor_tentativa == 0 || index+1 < 
+                        statistics.melhor_tentativa)
+                        statistics.melhor_tentativa = index+1;
+                    statistics.distribuicao[index]++;
                     break;
+                }
             }
+            if (!result)
+                statistics.sequencia_atual = 0;
             statistics.jogos_jogados++;
 
-            console.log(`A palavra a adivinhar era ${word}`);
-            console.log(`Games: ${statistics.jogos_jogados}`);
+            statistics.output(word);
+            keyboard.reset_keyboard();
+            
         }
 
         rl.close()

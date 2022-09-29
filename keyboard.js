@@ -1,15 +1,15 @@
 const keyboard_line1 = ['q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p'];
 const keyboard_line2 = ['a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l'];
 const keyboard_line3 = ['z', 'x', 'c', 'v', 'b', 'n', 'm'];
-const color_line1 = ['\x1b[37m%s\x1b[0m ', '\x1b[37m%s\x1b[0m ',
+var color_line1 = ['\x1b[37m%s\x1b[0m ', '\x1b[37m%s\x1b[0m ',
     '\x1b[37m%s\x1b[0m ', '\x1b[37m%s\x1b[0m ', '\x1b[37m%s\x1b[0m ',
     '\x1b[37m%s\x1b[0m ', '\x1b[37m%s\x1b[0m ', '\x1b[37m%s\x1b[0m ',
     '\x1b[37m%s\x1b[0m ', '\x1b[37m%s\x1b[0m '];
-const color_line2 = ['\x1b[37m%s\x1b[0m ', '\x1b[37m%s\x1b[0m ',
+var color_line2 = ['\x1b[37m%s\x1b[0m ', '\x1b[37m%s\x1b[0m ',
     '\x1b[37m%s\x1b[0m ', '\x1b[37m%s\x1b[0m ', '\x1b[37m%s\x1b[0m ',
     '\x1b[37m%s\x1b[0m ', '\x1b[37m%s\x1b[0m ', '\x1b[37m%s\x1b[0m ',
     '\x1b[37m%s\x1b[0m '];
-const color_line3 = ['\x1b[37m%s\x1b[0m ', '\x1b[37m%s\x1b[0m ',
+var color_line3 = ['\x1b[37m%s\x1b[0m ', '\x1b[37m%s\x1b[0m ',
     '\x1b[37m%s\x1b[0m ', '\x1b[37m%s\x1b[0m ', '\x1b[37m%s\x1b[0m ',
     '\x1b[37m%s\x1b[0m ', '\x1b[37m%s\x1b[0m '];
 
@@ -57,4 +57,18 @@ function colorize_keyboard(colors, characters) {
 
 }
 
-module.exports = { colorize_keyboard, update_keyboard };
+function reset_keyboard() {
+    color_line1 = ['\x1b[37m%s\x1b[0m ', '\x1b[37m%s\x1b[0m ',
+    '\x1b[37m%s\x1b[0m ', '\x1b[37m%s\x1b[0m ', '\x1b[37m%s\x1b[0m ',
+    '\x1b[37m%s\x1b[0m ', '\x1b[37m%s\x1b[0m ', '\x1b[37m%s\x1b[0m ',
+    '\x1b[37m%s\x1b[0m ', '\x1b[37m%s\x1b[0m '];
+    color_line2 = ['\x1b[37m%s\x1b[0m ', '\x1b[37m%s\x1b[0m ',
+    '\x1b[37m%s\x1b[0m ', '\x1b[37m%s\x1b[0m ', '\x1b[37m%s\x1b[0m ',
+    '\x1b[37m%s\x1b[0m ', '\x1b[37m%s\x1b[0m ', '\x1b[37m%s\x1b[0m ',
+    '\x1b[37m%s\x1b[0m '];
+    color_line3 = ['\x1b[37m%s\x1b[0m ', '\x1b[37m%s\x1b[0m ',
+    '\x1b[37m%s\x1b[0m ', '\x1b[37m%s\x1b[0m ', '\x1b[37m%s\x1b[0m ',
+    '\x1b[37m%s\x1b[0m ', '\x1b[37m%s\x1b[0m '];
+}
+
+module.exports = { colorize_keyboard, update_keyboard, reset_keyboard };

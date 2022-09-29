@@ -29,9 +29,12 @@ function update_keyboard(word, color) {
 }
 
 function colorize_keyboard(colors, characters) {
+    //console.log(characters);
     // log word hints
-    console.log(colors, characters[0], characters[1],
-        characters[2], characters[3], characters[4]);
+    for (var i = 0; i < 6; i++) {
+        console.log(colors[i], characters[i][0], characters[i][1],
+            characters[i][2], characters[i][3], characters[i][4]);
+    }
     // log keyboard hints
     // line 1
     console.log(color_line1[0] + color_line1[1] + color_line1[2] +

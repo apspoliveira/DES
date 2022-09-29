@@ -21,6 +21,8 @@ const main = async () => {
     var data = read_file.readFile();
     // Load persistent data from JSON
     read_file.readJSON();
+    var lines = [];
+    var color_array = [];
 
     read_file.body.on('update', async function () {
         var words = read_file.body.data;
@@ -30,9 +32,11 @@ const main = async () => {
 
             var input = "Vá inserindo a palavra a adivinhar até acertar";
             console.log(input);
+            lines = ["     ", "     ", "     ", "     ", "     ", "     "];
+            color_array = ["", "", "", "", "", ""];
 
             for (let index = 0; index < tries;) {
-                var result = await insert_word.insertWord(word, words, rl);
+                var result = await insert_word.insertWord(word, words, rl, lines, index, color_array);
                 if (result == undefined)
                     index++;
                 if (result == true) {

@@ -15,14 +15,13 @@ function generateWord(words) {
 }
 
 const main = async () => {
+    var tries = 6;
     var data = read_file.readFile();
 
     read_file.body.on('update', async function () {
         words = read_file.body.data;
 
         while (true) {
-            var tries = 6;
-
             var word = generateWord(words);
 
             var input = "Vá inserindo a palavra a adivinhar até acertar";
@@ -36,10 +35,12 @@ const main = async () => {
                     break;
             }
             statistics.jogos_jogados++;
-            rl.close()
 
             console.log(`A palavra a adivinhar era ${word}`);
+            console.log(`Games: ${statistics.jogos_jogados}`);
         }
+
+        rl.close()
     });
 }
 

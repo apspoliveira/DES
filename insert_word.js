@@ -11,7 +11,9 @@ function insertWord(word, words, rl) {
             });
 
             if (match.length == 0) {
+                console.error("Palavra não existe no dicionário");
                 resolve(false);
+                return;
             }
 
             var colors = "";

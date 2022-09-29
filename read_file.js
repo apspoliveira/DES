@@ -8,9 +8,7 @@ body.data = [];
 
 function readFile() {
     let data = '';
-    console.log("read file");
 
-    // https://raw.githubusercontent.com/apspoliveira/DES/main/words.txt
     const options = {
         host: 'raw.githubusercontent.com',
         path:  '/apspoliveira/DES/master/words.txt', //'/fserb/pt-br/master/palavras',
@@ -18,10 +16,6 @@ function readFile() {
     };
 
     const req = https.request(options, res => {
-        console.log(`statusCode: ${res.statusCode}`);
-        var prev_length = 0;
-        var new_length = 0;
-
         res.on('data', d => {
             var data = d.toString().split(/\r?\n/);
             var list = [];
@@ -32,11 +26,8 @@ function readFile() {
             body.data = body.data.concat(list);
 
             // when all data have been read
-            if (/*body.data.length > 19200*/body.data.length >= 3)
+            if (/*body.data.length > 19200*/body.data.length >= 20)
                 body.emit('update');
-            //console.log(body.data.length);
-
-            //console.log(body.data);
         });
     });
 
@@ -47,6 +38,7 @@ function readFile() {
     req.end();
 }
 
+// Read persistent data
 function readJSON() {
     var data = JSON.parse(loadData("statistics.json"));
     statistics.jogos_jogados = data.jogos_jogados;

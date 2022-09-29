@@ -9,7 +9,6 @@ var melhor_sequencia = 0;
 var distribuicao = [0, 0, 0, 0, 0, 0];
 
 function output(word) {
-    //console.log(jogos_jogados);
     this.percentagem_ganhos =  Math.floor(this.jogos_ganhos/this.jogos_jogados*100);
     console.log(`A palavra a adivinhar era ${word}`);
     console.log(`Games: ${this.jogos_jogados}   Won: ${this.jogos_ganhos}    % Won:   ${this.percentagem_ganhos} %\n`);

@@ -21,17 +21,9 @@ const main = async () => {
     var data = read_file.readFile();
     // Load persistent data from JSON
     read_file.readJSON();
-    
-    console.log(statistics.jogos_jogados);
-    console.log(statistics.jogos_ganhos);
-    console.log(statistics.percentagem_ganhos);
-    console.log(statistics.melhor_tentativa);
-    console.log(statistics.sequencia_atual);
-    console.log(statistics.melhor_sequencia);
-    console.log(statistics.distribuicao);
 
     read_file.body.on('update', async function () {
-        words = read_file.body.data;
+        var words = read_file.body.data;
 
         while (true) {
             var word = generateWord(words);
